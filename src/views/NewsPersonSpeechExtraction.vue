@@ -58,7 +58,27 @@
           <div class="resultContent ke">
             <div class="title">关键词提取</div>
             <div class="resContent">
-              <div class="nodata" v-if="keData === ''">暂无数据</div>
+              <div class="keTable">
+                <el-table
+                :data="keData"
+                max-height="400"
+                border
+                style="width: 100%">
+                  <el-table-column
+                    prop="word"
+                    label="名称"
+                    width="180">
+                  </el-table-column>
+                  <el-table-column
+                    prop="weight"
+                    label="权重"
+                    width="180">
+                  </el-table-column>
+                </el-table>
+              </div>
+              <div class="keTags">
+                <div class="tag" :class="tagClass(value.weight)" v-for="(value, index) in keData" :key = index>{{value.word}}</div>
+              </div>
             </div>
           </div>
           <div class="resultContent sa">
@@ -121,11 +141,13 @@ export default {
     },
     async getNPSEData (prefix) {
       let res = await getNPSEData({ prefix: prefix })
-      this.npseData = res.data
+      // this.npseData = res.data
+      this.npseData = res
     },
     async getKEData (prefix) {
       let res = await getKEData({ prefix: prefix })
-      this.keData = res.data
+      // this.keData = res.data
+      this.keData = res
     },
     catalogClass (value) {
       if (this.checked === value) {
@@ -136,6 +158,19 @@ export default {
     },
     clickCatalog (value) {
       this.checked = value
+    },
+    tagClass (weight) {
+      if (weight >= 0.9) {
+        return 'level1'
+      } else if (weight > 0.8) {
+        return 'level2'
+      } else if (weight > 0.6) {
+        return 'level3'
+      } else if (weight > 0.4) {
+        return 'level4'
+      } else {
+        return 'level5'
+      }
     }
   }
 }
