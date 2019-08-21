@@ -26,7 +26,12 @@ module.exports = (() => {
       https: false,
       hotOnly: false,
       // 配置代理转发
-      proxy: {},
+      proxy: {
+        '/System': {
+          target: 'http://192.168.22.127:8056',
+          changeOrigin: true
+        }
+      },
       before: app => {}
     }
   }
