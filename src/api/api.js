@@ -1,15 +1,9 @@
-/*
- * @Author: wupeiwen javapeiwen2010@gmail.com
- * @Date: 2018-09-18 10:19:23
- * @Last Modified by: wupeiwen javapeiwen2010@gmail.com
- * @Last Modified time: 2019-07-16 09:06:16
- */
-//  引入httpUtil
-import { get, post } from '@/utils/httpUtil'
+//  引入http.js
+import { post } from '@/http.js'
 // 基本路径
-const baseUrl = '/SearchCase'
+const baseUrl = '/System'
 
-// 首页最新动态数据
-export const latestNews = () => get(`${baseUrl}/HomePages`)
-// 列表页搜索结果数据
-export const getListData = (params) => post(`${baseUrl}/SearchResults`, params)
+// 新闻言论提取数据
+export const getNPSEData = (params) => post(`${baseUrl}/speechExtract`, params)
+// 关键词提取数据
+export const getKEData = (params) => post(`${baseUrl}/keywordExtract`, params)
