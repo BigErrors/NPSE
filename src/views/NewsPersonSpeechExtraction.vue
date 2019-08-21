@@ -23,17 +23,54 @@
       <div class="result">
         <div class="left">
           <div class="catalog"
-          v-for="(item, index) in resultType"
-          :key="index"
-          :class="catalogClass(index)"
-          @click="clickCatalog(index)"
-          >{{item}}</div>
+          v-for="(value, key) in resultType"
+          :key="key"
+          :class="catalogClass(key)"
+          @click="clickCatalog(key)"
+          >{{value}}</div>
         </div>
         <div class="right">
-          <div class="resultContent NSE_Res">
+          <div class="resultContent npse">
             <div class="title">新闻言论提取</div>
             <div class="resContent">
-              {{resultContent}}
+              <el-table
+                :data="npseData"
+                max-height="400"
+                border
+                style="width: 100%">
+                <el-table-column
+                  prop="name"
+                  label="人/机构"
+                  width="180">
+                </el-table-column>
+                <el-table-column
+                  prop="trigger"
+                  label="触发词"
+                  width="180">
+                </el-table-column>
+                <el-table-column
+                  prop="content"
+                  label="内容">
+                </el-table-column>
+              </el-table>
+            </div>
+          </div>
+          <div class="resultContent ke">
+            <div class="title">关键词提取</div>
+            <div class="resContent">
+              <div class="nodata" v-if="keData === ''">暂无数据</div>
+            </div>
+          </div>
+          <div class="resultContent sa">
+            <div class="title">语义联想</div>
+            <div class="resContent">
+              <div class="nodata" v-if="saData === ''">暂无数据</div>
+            </div>
+          </div>
+          <div class="resultContent wc">
+            <div class="title">词云</div>
+            <div class="resContent">
+              <div class="nodata" v-if="wcData === ''">暂无数据</div>
             </div>
           </div>
         </div>
@@ -46,29 +83,59 @@
 </template>
 
 <script>
+import { getNPSEData, getKEData } from '@/api/api.js'
 export default {
   name: 'npse',
   data () {
     return {
       textarea: '',
-      resultType: ['新闻言论提取', '关键词提取', '词云', '分词'],
-      checked: 0,
-      resultContent: ''
+      resultType: {
+        news_person_speech_extraction: '新闻言论提取',
+        keywords_extraction: '关键词提取',
+        semantic_association: '语义联想',
+        word_cloud: '词云'
+      },
+      checked: 'news_person_speech_extraction',
+      npseData: [],
+      keData: '',
+      saData: '',
+      wcData: ''
     }
   },
   methods: {
-    commit () {
-      this.resultContent = 'this is test result'
-    },
-    catalogClass (index) {
-      if (this.checked === index) {
-        return 'checked catalog' + index
-      } else {
-        return 'catalog' + index
+    test (value) {
+      if (value === 'news_person_speech_extraction') {
+        return this.npseData
       }
     },
-    clickCatalog (index) {
-      this.checked = index
+    commit () {
+      if (this.textarea === '') {
+        this.$message({
+          type: 'warning',
+          message: '输入的演示文本不可为空'
+        })
+      } else {
+        this.getNPSEData(this.textarea)
+        this.getKEData(this.textarea)
+      }
+    },
+    async getNPSEData (prefix) {
+      let res = await getNPSEData({ prefix: prefix })
+      this.npseData = res.data
+    },
+    async getKEData (prefix) {
+      let res = await getKEData({ prefix: prefix })
+      this.keData = res.data
+    },
+    catalogClass (value) {
+      if (this.checked === value) {
+        return 'checked ' + value
+      } else {
+        return value
+      }
+    },
+    clickCatalog (value) {
+      this.checked = value
     }
   }
 }
