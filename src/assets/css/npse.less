@@ -120,6 +120,12 @@
             .keTable {
               width: 361px;
               margin-left: 20px;
+              .el-table {
+                margin: 10px;
+                th,td {
+                  padding: 6px
+                }
+              }
               .el-table__empty-block {
                 height: 152px;;
                 span {
@@ -170,6 +176,28 @@
                 span {
                   font-size: 25px;
                   color: rgba(175, 174, 174, 0.5);
+                }
+              }
+            }
+          }
+          &.wc {
+            .wordCloud {
+              margin: auto;
+            }
+          }
+          &.sa {
+            .resContent {
+              display: flex;
+              justify-content: space-around;
+              .table {
+                .tableTitle {
+                  margin: 20px 0;
+                }
+                .el-table {
+                  margin-bottom: 5px;
+                  th,td {
+                    padding: 6px
+                  }
                 }
               }
             }

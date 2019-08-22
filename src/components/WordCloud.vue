@@ -1,0 +1,462 @@
+<template>
+  <div class="container">
+    <div class='wordCloud' ref="keyWords" :style="{ width: width + 'px', height: height + 'px' }"></div>
+  </div>
+</template>
+<script>
+export default {
+  name: 'wordcloud',
+  props: {
+    height: {
+      type: Number,
+      default: 500
+    },
+    width: {
+      type: Number,
+      default: 600
+    },
+    data: {
+      type: Array,
+      default () {
+        return [{
+          name: '台湾',
+          value: 8
+        },
+        {
+          name: '岛内',
+          value: 3
+        },
+        {
+          name: '团体',
+          value: 3
+        },
+        {
+          name: '投资',
+          value: 3
+        },
+        {
+          name: '两岸',
+          value: 3
+        },
+        {
+          name: '工业',
+          value: 2
+        },
+        {
+          name: '总会',
+          value: 2
+        },
+        {
+          name: '台当局',
+          value: 2
+        },
+        {
+          name: '政策',
+          value: 2
+        },
+        {
+          name: '建言',
+          value: 2
+        },
+        {
+          name: '白皮书',
+          value: 2
+        },
+        {
+          name: '指出',
+          value: 2
+        },
+        {
+          name: '五缺',
+          value: 2
+        },
+        {
+          name: '改善',
+          value: 2
+        },
+        {
+          name: '两岸关系',
+          value: 2
+        },
+        {
+          name: '紧张',
+          value: 2
+        },
+        {
+          name: '对外',
+          value: 2
+        },
+        {
+          name: '工总',
+          value: 2
+        },
+        {
+          name: '大陆',
+          value: 2
+        },
+        {
+          name: '第一',
+          value: 2
+        },
+        {
+          name: '最具',
+          value: 1
+        },
+        {
+          name: '影响力',
+          value: 1
+        },
+        {
+          name: '工商',
+          value: 1
+        },
+        {
+          name: '连续',
+          value: 1
+        },
+        {
+          name: '发表',
+          value: 1
+        },
+        {
+          name: '集中反映',
+          value: 1
+        },
+        {
+          name: '产业界',
+          value: 1
+        },
+        {
+          name: '呼声',
+          value: 1
+        },
+        {
+          name: '特别',
+          value: 1
+        },
+        {
+          name: '提到',
+          value: 1
+        },
+        {
+          name: '面临',
+          value: 1
+        },
+        {
+          name: '缺水',
+          value: 1
+        },
+        {
+          name: '缺电',
+          value: 1
+        },
+        {
+          name: '缺工',
+          value: 1
+        },
+        {
+          name: '缺地',
+          value: 1
+        },
+        {
+          name: '人才',
+          value: 1
+        },
+        {
+          name: '困境',
+          value: 1
+        },
+        {
+          name: '整体',
+          value: 1
+        },
+        {
+          name: '环境',
+          value: 1
+        },
+        {
+          name: '走向',
+          value: 1
+        },
+        {
+          name: '崩坏',
+          value: 1
+        },
+        {
+          name: '四年',
+          value: 1
+        },
+        {
+          name: '未见',
+          value: 1
+        },
+        {
+          name: '劳动',
+          value: 1
+        },
+        {
+          name: '法规',
+          value: 1
+        },
+        {
+          name: '僵化',
+          value: 1
+        },
+        {
+          name: '陷入',
+          value: 1
+        },
+        {
+          name: '孤立',
+          value: 1
+        },
+        {
+          name: '质疑',
+          value: 1
+        },
+        {
+          name: '面对',
+          value: 1
+        },
+        {
+          name: '几多',
+          value: 1
+        },
+        {
+          name: '围绕',
+          value: 1
+        },
+        {
+          name: '当局',
+          value: 1
+        },
+        {
+          name: '数据',
+          value: 1
+        },
+        {
+          name: '进口',
+          value: 1
+        },
+        {
+          name: '来源',
+          value: 1
+        },
+        {
+          name: '首位',
+          value: 1
+        },
+        {
+          name: '建议',
+          value: 1
+        },
+        {
+          name: '台湾当局',
+          value: 1
+        },
+        {
+          name: '摒弃',
+          value: 1
+        },
+        {
+          name: '对抗',
+          value: 1
+        },
+        {
+          name: '思维',
+          value: 1
+        },
+        {
+          name: '求同存异',
+          value: 1
+        },
+        {
+          name: '现实',
+          value: 1
+        },
+        {
+          name: '基础',
+          value: 1
+        },
+        {
+          name: '合作',
+          value: 1
+        },
+        {
+          name: '取代',
+          value: 1
+        },
+        {
+          name: '对立',
+          value: 1
+        },
+        {
+          name: '民众',
+          value: 1
+        },
+        {
+          name: '谋福',
+          value: 1
+        },
+        {
+          name: '创利',
+          value: 1
+        },
+        {
+          name: '现任',
+          value: 1
+        },
+        {
+          name: '理事长',
+          value: 1
+        },
+        {
+          name: '台塑',
+          value: 1
+        },
+        {
+          name: '总裁',
+          value: 1
+        },
+        {
+          name: '王文渊',
+          value: 1
+        },
+        {
+          name: '几年',
+          value: 1
+        },
+        {
+          name: '观光',
+          value: 1
+        },
+        {
+          name: '零售',
+          value: 1
+        },
+        {
+          name: '饭店业',
+          value: 1
+        },
+        {
+          name: '农渔',
+          value: 1
+        },
+        {
+          name: '蔬果',
+          value: 1
+        },
+        {
+          name: '产品',
+          value: 1
+        },
+        {
+          name: '岛内外',
+          value: 1
+        },
+        {
+          name: '却步',
+          value: 1
+        },
+        {
+          name: '新任',
+          value: 1
+        },
+        {
+          name: '领导人',
+          value: 1
+        },
+        {
+          name: '出炉',
+          value: 1
+        },
+        {
+          name: '审慎',
+          value: 1
+        },
+        {
+          name: '思考',
+          value: 1
+        },
+        {
+          name: '中国',
+          value: 1
+        }
+        ]
+      }
+    }
+  },
+  data () {
+    return {
+
+    }
+  },
+  watch: {
+    data (newVal, oldVal) {
+      console.log('data Change')
+      this.initEchart()
+    }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.initEchart()
+    })
+  },
+  methods: {
+    initEchart () {
+      // 获取DOM节点并初始化
+      let myChart = this.$echarts.init(this.$refs.keyWords)
+      let maskImage = new Image()
+      maskImage.src = 'data:image/jpeg;base64,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AKKKKAGSSLDGzudqqMkmuM1bUm1G4LdI14Rf61oeJNU8x/ssZ+RT859T6VhUFIKKKKBhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB2GgX/2yzCscyR/Kfp2NadcXod59j1CMk4R/kb8a7SgkKKKKBBXLeKLvzbtYAfljGT9TXTyOI0Z24VRk1wVzMbi4klbq7E0DRHRRRQUFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBo6JqX9n3WHP7mThvb3rsevIrz2uq8Oaj9pt/Ic/vI+nutBLNmiiigQVna1qQ0+1+U/vX4Uf1q+7iNSzHCqMk1xOp3zahdvIfu9FHoKBlUsWJJOSaSiigoKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArttIu/tmnxSE5YDa31FcTW/wCFbrbJNAT94bx/WgTOkooooJM3xBP5OlyY6uQg/H/61cdXQ+LJv9RD9XP8h/WueoKQUUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKnsrp7K6SZOqnkeo7ioKKAO/gmW4hSRDlWGRUlc94XvuGtXP+0n9RW7cTrbQvK5wqjJoIMXxNqPlxi1Q/M3L/T0rmqlubhrq4eV/vMc1FQUFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACrek3H2fUYHzgbsH6HiqlAODkdaAPQ6KitZvtFrFJ/eUH9KKCDlvEknmaoy/3FC/1/rWVVvVpPM1K5P8AtkflxVSgoKKKKBhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAEltcNazpKn3lOa2vEGrLcwQxRNlXAdv6CsGigQUUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDsvD8nmaVD6rlf1oqr4VkLWcqf3Xz+Y/8ArUUEHOXTbrqZvV2P61FTn++31ptBYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAdD4VkCrcg+qn+dFU9DYr5+P9n+tFBJmSf6xvrTakuF2zyL6MR+tR0FBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBq6EM+f/wAB/rRU/hmDzvtJ9Nv9aKCTM1JfL1C5H/TRv51WrR1+Py9Vm9Gw36VnUDCiiigYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB03hNf9Hnb1cD9P8A69FT+GY/L0wN/fct/T+lFBJm+Ko9t3C/95Mfkf8A69YldR4qh32cUo/gbH4H/wDUK5egYUUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKfDGZpkjHVmC/nQB2ulR+TptuvfYD+fNFWlUIoUdAMCiggq6tD9o06dMZO3I+o5rh69CPPB5FcJe25tbuWL+6xA+nagaIKKKKCgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACtLw/D52qR+iZc/5+tZtdH4Ut8LNOR1+QfzP9KBHQUUUUEhXL+Kbfy7qOYDiRcH6iuorN8QWv2rTnIGWj+cf1/SgZx1FFFBQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXb6Tb/ZdPhTGDt3H6nmuT0u1+2X0UePlzlvoK7iglhRRRQIKRlDKQRkHg0tFAHCahamzvJYuynj6dqr10Ximz/wBXcqP9hv6VztBQUUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiinRxtJIqKMsxwBQB0XhW02xy3BHLfIv8AWt+oLO3FnaxQj+FcH696noICiiigAooooAhvLdbu2khbowx9K4SWNoZGRhhlOCK9Brl/E1j5Vwtwo+WThvrQNGJRRRQUFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFbPhmy866M7D5Yun+8axwCxAAya7bSrP7DYxxn7+NzfU0CZcooooJCiiigAooooAKr6haLfWskJ/iHB9D2qxRQB59JG0bsjDDKcEU2t3xNp/lyrdIPlfh/r61hUFBRRRQMKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiilVS7BVGWJwBQBq+HbH7VeeawzHFz9T2rraqaZZCws0i/i6sfU1boJCiiigQUUUUAFFFFABRRRQBFdW6XVu8TjKsMVw11bvaXDwuPmU4rvqxPEmm+fD9pQfPGPm9xQNHL0UUUFBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVu+GdP82U3Tj5U4T3PrWRZ2r3lwkKdWP5D1ruLe3S1gSJBhVGKBMlooooJCiiigAooooAKKKKACiiigApCAwIIyKWigDi9Z006fdEKP3T8of6VQruNSsV1C1aI8N1VvQ1xUsbQyNG42spwRQUMooooGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUVq6Dpn2248xx+5jOT7n0oEa/h7Tfslv5zj97IPyFa9FFBIUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVheI9L85PtUQ+dR84HcetbtJ14PIoA89orU1zSzY3G9B+5c8ex9Ky6CwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKACTgDJoAmtLV7y4SKMfM36e9dvaWqWdukUY+VR+fvVLQ9L/s+33uP37jJ9h6Vp0EsKKKKBBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBFdWyXkDxSDKsPy964m+s3sbhon7dD6j1ru6oatpi6lb46Sryjf0oGcXRTpI2hkZHG1lOCDTaCgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArf8O6TuIupV+Uf6tT396o6LpZ1CfLcQp94+vtXYqoRQqjAHAFAmLRRRQSFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAY2vaP9qQ3EQ/fKPmH94f41yteh1zfiDR9ha6gX5erqO3vQNGBRRRQUFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABVnT7GTULhYkHHVm7AVFb273UyxRrudjxXZ6bpyabbhF5c8s3qaBE1rapZwLFGMKv6+9TUUUEhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUhAYEEZFLRQByeuaObKQyxDMDf8Ajp9PpWRXoMkayoyOoZWGCDXIaxpLadLuXLQMflPp7GgozaKKKBhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFOjjaRwiAszHAApACxAAya6rQ9GFmgmmH79ug/u/wD16BE2jaSunQ7nwZ2+8fT2FaVFFBIUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVHNClxE0ci7kbqKkooA4rVtLfTZsfeib7rf0qjXfXNtHdwtFKu5G/zmuN1PTJNNm2t80Z+6/r/wDXoKKdFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoorpND0PZtubhfm6oh7e5oEP0HRfIC3E6/vDyqn+H3+tblFFBIUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABUN1ax3kLRSruU/p71NRQBxGpabJps21vmjP3X9ap13t1ax3kLRSruU/pXH6npcmmzYb5oz91/X/wCvQUUqKKKBhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUV0mh6Fs23FyvzdUjPb3NAhND0PbtuLheeqRn+ZroKKKCQooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKiuLeO6haOVdyNUtFAHF6rpMmmyf3oW+639DVCvQJoUuI2jkUMjcEGuS1fRn0996ZeA9G/u+xoKMyiiigYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABQAWIAGTSojSMFUFmPAArqtG0NbPE0wDTdh2X/AOvQIi0XQhBtnuFzJ1VD/D9fet2iigkKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKa6LIpVgGU8EGnUUAcprGhtZ5mgBaHuO6/wD1qx69CPPB5Fc7rPh/buntVyvVox/MUDOfooooKCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACnwwvcSLHGpZ26AVJZ2ct9MI4lye57Cuu0zSotNjwPmlP3n/wA9qBEWk6KmnqHfDznq3YewrToooJCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAMTWNBW53TW42y9SvZv/r1zDo0bFWBVhwQa9CrO1XRo9RXcPkmHRvX2NAzjaKlubWS0mMcq7WFRUFBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVc07TZdSl2oMIPvOegqxpOiSagwkkykHr3b6V1cEEdtGI41CoOgFAiOxsYrCERxL9W7mrFFFBIUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAFa+0+HUItkq8/wALDqK5HUdLm02TDjKH7rjoa7emTQpcRlJFDoeoNAzz+itbVtBeyzJDmSH9VrJoGFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoop8ML3EgSNS7noBQAzrwK39I8Ol8TXQwvUR+v1q7pOgpZYlmxJN29FrXoJuIqhVAAwBwAKWiigQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUA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Ltj7yN0/+vXUafo8GnjKjfJ3duv/ANagRj6b4aeXEl1lF/55jqfr6V0UMMdvGEjQIo7CpKKCQooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAr3ljDfR7Zk3ejdxXM6j4fns8vHmaL1HUfUV11FAzzyiuw1DQYL7LKPJl/vKOD9RXM32mz6e2JU+Xs46GgZVooooGFFFFABRRRQAUUUUAFFFFABRSgFiABk1sad4bluMPcfuo/7v8R/woEZVvbyXUgSJC7HsK6LTvDSRYe6PmP/AHB0H+Na9rZw2ceyFAg/U1NQK4iqFUADAHQCloooEFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFNeNZFKuoZT1BFOooAwNQ8Mq+XtTtP/ADzbp+Brn5reS3kKSoUYdiK7+oLqzhvI9kyBx+ooHc4OitrUPDctvue3Pmx9dv8AEP8AGsZgVJBGD6GgYlFFFAwooqe1spr2TZChY9z2H1NAEFXtP0e41DBVdkf99un4etbmn+G4rfDznzpP7v8ACP8AGtgAKAAMCgm5R0/R7fT8FV3yf326/h6VfoooEFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABVK/0i31AEuu2Ts69f/r1dooA43UNDuLHLY82L+8v9RVGOJ5nCRqXY9Aor0Cq9rDHFJMUjVCW52qB2FA7mJp/hknD3RwP+ea/1NdBDClvGEjQIo7KKfRQIKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q=='
+      let option = {
+        backgroundColor: '#fff',
+        tooltip: {
+          show: false
+        },
+        series: [
+          {
+            name: '',
+            type: 'wordCloud',
+            // size: ['10%', '10%'],
+            sizeRange: [12, 55],
+            textRotation: [0, 45, 90, -45],
+            rotationRange: [-45, 0, 45, 90],
+            textPadding: 0,
+            maskImage: maskImage,
+            autoSize: {
+              enable: true,
+              minSize: 14
+            },
+            left: 'center',
+            top: 'center',
+            right: null,
+            bottom: null,
+            textStyle: {
+              normal: {
+                color: function () {
+                  return (
+                    'rgb(' +
+                    Math.round(Math.random() * 255) +
+                    ', ' +
+                    Math.round(Math.random() * 255) +
+                    ', ' +
+                    Math.round(Math.random() * 255) +
+                    ')'
+                  )
+                }
+              }
+            },
+            data: this.data
+          }
+        ]
+      }
+      console.log(this.data)
+      // myChart.setOption(option)
+      maskImage.onload = function () {
+        myChart.setOption(option)
+        console.log(myChart.getOption())
+      }
+    }
+  }
+}
+</script>

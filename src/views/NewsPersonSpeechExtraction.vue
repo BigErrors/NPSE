@@ -26,14 +26,15 @@
           v-for="(value, key) in resultType"
           :key="key"
           :class="catalogClass(key)"
-          @click="clickCatalog(key)"
+          @click="setAnchor(key)"
           >{{value}}</div>
         </div>
-        <div class="right">
+        <div class="right" id="right">
           <div class="resultContent npse">
             <div class="title">新闻言论提取</div>
             <div class="resContent">
               <el-table
+              stripe
                 :data="npseData"
                 max-height="400"
                 border
@@ -60,6 +61,7 @@
             <div class="resContent">
               <div class="keTable">
                 <el-table
+                stripe
                 :data="keData"
                 max-height="400"
                 border
@@ -84,13 +86,32 @@
           <div class="resultContent sa">
             <div class="title">语义联想</div>
             <div class="resContent">
-              <div class="nodata" v-if="saData === ''">暂无数据</div>
+              <div class="table" v-for="(value, index) in saData" :key="index">
+                <div class="tableTitle">关键词： {{value.keyword}}</div>
+                <el-table
+                stripe
+                :data="value.array"
+                max-height="400"
+                border
+                style="width: 100%">
+                  <el-table-column
+                    prop="word"
+                    label="名称"
+                    width="180">
+                  </el-table-column>
+                  <el-table-column
+                    prop="weight"
+                    label="权重"
+                    width="180">
+                  </el-table-column>
+                </el-table>
+              </div>
             </div>
           </div>
           <div class="resultContent wc">
             <div class="title">词云</div>
             <div class="resContent">
-              <div class="nodata" v-if="wcData === ''">暂无数据</div>
+              <word-cloud :data="wcData"> </word-cloud>
             </div>
           </div>
         </div>
@@ -103,9 +124,13 @@
 </template>
 
 <script>
-import { getNPSEData, getKEData } from '@/api/api.js'
+import { getNPSEData, getKEData, getSAData, getWCData } from '@/api/api.js'
+import wordCloud from '@/components/WordCloud'
 export default {
   name: 'npse',
+  components: {
+    wordCloud
+  },
   data () {
     return {
       textarea: '',
@@ -117,9 +142,10 @@ export default {
       },
       checked: 'news_person_speech_extraction',
       npseData: [],
-      keData: '',
-      saData: '',
-      wcData: ''
+      keData: [],
+      saData: [
+      ],
+      wcData: []
     }
   },
   methods: {
@@ -137,17 +163,34 @@ export default {
       } else {
         this.getNPSEData(this.textarea)
         this.getKEData(this.textarea)
+        this.getSAData(this.textarea)
+        this.getWCData(this.textarea)
       }
     },
     async getNPSEData (prefix) {
       let res = await getNPSEData({ prefix: prefix })
-      // this.npseData = res.data
-      this.npseData = res
+      this.npseData = res.data
+      // this.npseData = res
     },
     async getKEData (prefix) {
       let res = await getKEData({ prefix: prefix })
-      // this.keData = res.data
-      this.keData = res
+      this.keData = res.data
+      // this.keData = res
+    },
+    async getSAData (prefix) {
+      let res = await getSAData({ prefix: prefix })
+      this.saData = res.data
+    },
+    async getWCData (prefix) {
+      let res = await getWCData({ prefix: prefix })
+      this.wcData = res.data
+      this.wcData.forEach(ele => {
+        ele.name = ele.word
+        ele.value = ele.weight
+        delete ele['word']
+        delete ele['weight']
+      })
+      this.$forceUpdate()
     },
     catalogClass (value) {
       if (this.checked === value) {
@@ -155,9 +198,6 @@ export default {
       } else {
         return value
       }
-    },
-    clickCatalog (value) {
-      this.checked = value
     },
     tagClass (weight) {
       if (weight >= 0.9) {
@@ -171,7 +211,46 @@ export default {
       } else {
         return 'level5'
       }
+    },
+    setAnchor (position) {
+      let heightArr = []
+      let sum = 0
+      let divRight = document.getElementById('right')
+      let divRightChildren = divRight.children
+
+      for (let i = 0; i < divRightChildren.length; i++) {
+        sum += (divRightChildren[i].scrollHeight + 20)
+        heightArr.push(sum)
+      }
+      let positionMap = {
+        'news_person_speech_extraction': 0,
+        'keywords_extraction': heightArr[0],
+        'semantic_association': heightArr[1],
+        'word_cloud': heightArr[2]
+      }
+      if (position) {
+        divRight.scrollTop = positionMap[position]
+        this.checked = 'word_cloud'
+      } else {
+        if (divRight.scrollTop < heightArr[0] - 100) {
+          this.checked = 'news_person_speech_extraction'
+        } else if (divRight.scrollTop < heightArr[1] - 100) {
+          this.checked = 'keywords_extraction'
+        } else if (divRight.scrollTop < heightArr[2] - 100) {
+          divRight.scrollHeight - divRight.scrollTop === 500 ? this.checked = 'word_cloud' : this.checked = 'semantic_association'
+        } else {
+          this.checked = 'word_cloud'
+        }
+      }
     }
+  },
+  mounted () {
+    let _this = this
+    this.$nextTick(() => {
+      document.getElementById('right').onscroll = () => {
+        _this.setAnchor()
+      }
+    })
   }
 }
 </script>

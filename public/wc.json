@@ -1,0 +1,366 @@
+[
+  {
+      "word": "台湾",
+      "weight": 8
+  },
+  {
+      "word": "岛内",
+      "weight": 3
+  },
+  {
+      "word": "团体",
+      "weight": 3
+  },
+  {
+      "word": "投资",
+      "weight": 3
+  },
+  {
+      "word": "两岸",
+      "weight": 3
+  },
+  {
+      "word": "工业",
+      "weight": 2
+  },
+  {
+      "word": "总会",
+      "weight": 2
+  },
+  {
+      "word": "台当局",
+      "weight": 2
+  },
+  {
+      "word": "政策",
+      "weight": 2
+  },
+  {
+      "word": "建言",
+      "weight": 2
+  },
+  {
+      "word": "白皮书",
+      "weight": 2
+  },
+  {
+      "word": "指出",
+      "weight": 2
+  },
+  {
+      "word": "五缺",
+      "weight": 2
+  },
+  {
+      "word": "改善",
+      "weight": 2
+  },
+  {
+      "word": "两岸关系",
+      "weight": 2
+  },
+  {
+      "word": "紧张",
+      "weight": 2
+  },
+  {
+      "word": "对外",
+      "weight": 2
+  },
+  {
+      "word": "工总",
+      "weight": 2
+  },
+  {
+      "word": "大陆",
+      "weight": 2
+  },
+  {
+      "word": "第一",
+      "weight": 2
+  },
+  {
+      "word": "最具",
+      "weight": 1
+  },
+  {
+      "word": "影响力",
+      "weight": 1
+  },
+  {
+      "word": "工商",
+      "weight": 1
+  },
+  {
+      "word": "连续",
+      "weight": 1
+  },
+  {
+      "word": "发表",
+      "weight": 1
+  },
+  {
+      "word": "集中反映",
+      "weight": 1
+  },
+  {
+      "word": "产业界",
+      "weight": 1
+  },
+  {
+      "word": "呼声",
+      "weight": 1
+  },
+  {
+      "word": "特别",
+      "weight": 1
+  },
+  {
+      "word": "提到",
+      "weight": 1
+  },
+  {
+      "word": "面临",
+      "weight": 1
+  },
+  {
+      "word": "缺水",
+      "weight": 1
+  },
+  {
+      "word": "缺电",
+      "weight": 1
+  },
+  {
+      "word": "缺工",
+      "weight": 1
+  },
+  {
+      "word": "缺地",
+      "weight": 1
+  },
+  {
+      "word": "人才",
+      "weight": 1
+  },
+  {
+      "word": "困境",
+      "weight": 1
+  },
+  {
+      "word": "整体",
+      "weight": 1
+  },
+  {
+      "word": "环境",
+      "weight": 1
+  },
+  {
+      "word": "走向",
+      "weight": 1
+  },
+  {
+      "word": "崩坏",
+      "weight": 1
+  },
+  {
+      "word": "四年",
+      "weight": 1
+  },
+  {
+      "word": "未见",
+      "weight": 1
+  },
+  {
+      "word": "劳动",
+      "weight": 1
+  },
+  {
+      "word": "法规",
+      "weight": 1
+  },
+  {
+      "word": "僵化",
+      "weight": 1
+  },
+  {
+      "word": "陷入",
+      "weight": 1
+  },
+  {
+      "word": "孤立",
+      "weight": 1
+  },
+  {
+      "word": "质疑",
+      "weight": 1
+  },
+  {
+      "word": "面对",
+      "weight": 1
+  },
+  {
+      "word": "几多",
+      "weight": 1
+  },
+  {
+      "word": "围绕",
+      "weight": 1
+  },
+  {
+      "word": "当局",
+      "weight": 1
+  },
+  {
+      "word": "数据",
+      "weight": 1
+  },
+  {
+      "word": "进口",
+      "weight": 1
+  },
+  {
+      "word": "来源",
+      "weight": 1
+  },
+  {
+      "word": "首位",
+      "weight": 1
+  },
+  {
+      "word": "建议",
+      "weight": 1
+  },
+  {
+      "word": "台湾当局",
+      "weight": 1
+  },
+  {
+      "word": "摒弃",
+      "weight": 1
+  },
+  {
+      "word": "对抗",
+      "weight": 1
+  },
+  {
+      "word": "思维",
+      "weight": 1
+  },
+  {
+      "word": "求同存异",
+      "weight": 1
+  },
+  {
+      "word": "现实",
+      "weight": 1
+  },
+  {
+      "word": "基础",
+      "weight": 1
+  },
+  {
+      "word": "合作",
+      "weight": 1
+  },
+  {
+      "word": "取代",
+      "weight": 1
+  },
+  {
+      "word": "对立",
+      "weight": 1
+  },
+  {
+      "word": "民众",
+      "weight": 1
+  },
+  {
+      "word": "谋福",
+      "weight": 1
+  },
+  {
+      "word": "创利",
+      "weight": 1
+  },
+  {
+      "word": "现任",
+      "weight": 1
+  },
+  {
+      "word": "理事长",
+      "weight": 1
+  },
+  {
+      "word": "台塑",
+      "weight": 1
+  },
+  {
+      "word": "总裁",
+      "weight": 1
+  },
+  {
+      "word": "王文渊",
+      "weight": 1
+  },
+  {
+      "word": "几年",
+      "weight": 1
+  },
+  {
+      "word": "观光",
+      "weight": 1
+  },
+  {
+      "word": "零售",
+      "weight": 1
+  },
+  {
+      "word": "饭店业",
+      "weight": 1
+  },
+  {
+      "word": "农渔",
+      "weight": 1
+  },
+  {
+      "word": "蔬果",
+      "weight": 1
+  },
+  {
+      "word": "产品",
+      "weight": 1
+  },
+  {
+      "word": "岛内外",
+      "weight": 1
+  },
+  {
+      "word": "却步",
+      "weight": 1
+  },
+  {
+      "word": "新任",
+      "weight": 1
+  },
+  {
+      "word": "领导人",
+      "weight": 1
+  },
+  {
+      "word": "出炉",
+      "weight": 1
+  },
+  {
+      "word": "审慎",
+      "weight": 1
+  },
+  {
+      "word": "思考",
+      "weight": 1
+  },
+  {
+      "word": "中国",
+      "weight": 1
+  }
+]
