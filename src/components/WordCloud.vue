@@ -393,7 +393,6 @@ export default {
   },
   watch: {
     data (newVal, oldVal) {
-      console.log('data Change')
       this.initEchart()
     }
   },
@@ -450,11 +449,9 @@ export default {
           }
         ]
       }
-      console.log(this.data)
       // myChart.setOption(option)
       maskImage.onload = function () {
         myChart.setOption(option)
-        console.log(myChart.getOption())
       }
     }
   }

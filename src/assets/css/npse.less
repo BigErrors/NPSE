@@ -213,9 +213,50 @@
     height: 100px;
     background: rgb(78, 78, 78) ;
     color:#fff;
-    line-height: 100px;
-    span {
-      margin-right: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .copyRight {
+      margin-right: 200px;
+    }
+    .contact {
+      display: flex;
+      .icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(56, 56, 56, 0.1);
+        cursor: pointer;
+        &:hover {
+          background: rgba(56, 56, 56, 0.5);
+        }
+        &::before {
+          content: '';
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+        }
+        &.github {
+          margin-right: 20px;
+          &::before {
+            background: url('../image/github.png') center center no-repeat;
+            background-size: 70%;
+          }
+        }
+        &.wechat {
+          margin-right: 20px;
+          &::before {
+            background: url('../image/wechat.png')center center no-repeat;
+            background-size: 90%;
+          }
+        }
+        &.email {
+          &::before {
+            background: url('../image/email.png')center center no-repeat;
+            background-size: 70%;
+          }
+        }
+      }
     }
   }
 }
@@ -228,4 +269,28 @@
 ::-webkit-scrollbar-thumb {
   background-color: #333;
   border-radius: 2px;
+}
+
+// 遮罩样式
+.el-loading-spinner i {
+  color: rgb(155, 155, 155) !important;
+  font-size: 50px;
+}
+.el-loading-text {
+  color: rgb(155, 155, 155) !important;
+}
+.el-loading-mask {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+// 暂无数据样式
+
+.noData {
+  font-size: 25px;
+  color: rgba(175, 174, 174, 0.5);
+  line-height: 200px;
+  text-align: center;
+  &.keNoData {
+    margin-left: 200px;
+  }
 }
