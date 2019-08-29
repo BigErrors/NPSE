@@ -10,7 +10,7 @@
         <el-input
           type="textarea"
           :autosize="{ minRows: 3, maxRows: 6}"
-          placeholder="请输入内容"
+          :placeholder="placeholder"
           v-model="textarea">
         </el-input>
         <div class="commit">
@@ -131,24 +131,19 @@
     </div>
     <div class="footer">
       <div class="copyRight">
-        <span>攻城狮 ©{{new Date().getFullYear()}}</span>
+        <span><span class="ss">Copyright</span> © {{new Date().getFullYear()}} 攻城狮</span>
       </div>
       <div class="contact">
         <div class="icon github" @click="toGithub"></div>
         <div class="icon wechat" @click="getWechat">
-          <el-dialog
-            title="提示"
-            :visible.sync="dialogVisible"
-            width="30%"
-            :before-close="handleClose">
-            <span>这是一段信息</span>
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="dialogVisible = false">取 消</el-button>
-              <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-            </span>
-          </el-dialog>
         </div>
-        <div class="icon email" @click="getEmail"></div>
+          <el-dialog
+            title="扫描二维码添加微信"
+            :visible.sync="dialogVisible"
+            width="30%">
+            <div class="wechatClass">
+            </div>
+          </el-dialog>
       </div>
     </div>
   </div>
@@ -160,6 +155,9 @@ export default {
   name: 'npse',
   data () {
     return {
+      placeholder: `    台湾工业总会是岛内最具影响力的工商团体之一，2008年以来，该团体连续12年发表对台当局政策的建言白皮书，集中反映岛内产业界的呼声。
+    台湾工业总会指出，2015年的白皮书就特别提到台湾面临“五缺”（缺水、缺电、缺工、缺地、缺人才）困境，使台湾整体投资环境走向崩坏。然而四年过去，“五缺”未见改善，反而劳动法规日益僵化、两岸关系陷入紧张、对外关系更加孤立。该团体质疑，台当局面对每年的建言，“到底听进去多少，又真正改善了几多”？
+    围绕当局两岸政策，工总认为，由数据来看，当前大陆不仅是台湾第一大出口市场，亦是第一大进口来源及首位对外投资地，建议台湾当局摒弃两岸对抗思维，在“求同存异”的现实基础上，以“合作”取代“对立”，为台湾多数民众谋福创利。`,
       textarea: '',
       resultType: {
         news_person_speech_extraction: '新闻言论提取',
@@ -187,10 +185,10 @@ export default {
   methods: {
     commit () {
       if (this.textarea === '') {
-        this.$message({
-          type: 'warning',
-          message: '输入的演示文本不可为空'
-        })
+        this.getNPSEData(this.placeholder)
+        this.getKEData(this.placeholder)
+        this.getSAData(this.placeholder)
+        this.getWCData(this.placeholder)
       } else {
         this.getNPSEData(this.textarea)
         this.getKEData(this.textarea)
@@ -284,7 +282,7 @@ export default {
       }
     },
     toGithub () {
-      window.open('https://www.baidu.com/', '_blank')
+      window.open('https://github.com/WenNicholas/nlp_assignment/tree/master/Project01', '_blank')
     },
     getWechat () {
       this.dialogVisible = true
