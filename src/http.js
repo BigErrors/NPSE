@@ -16,7 +16,7 @@ axios.defaults.headers.delete['Content-Type'] = 'application/json'
 axios.defaults.withCredentials = true
 
 // 请求超时时间
-axios.defaults.timeout = 20000
+axios.defaults.timeout = 50000
 // 请求拦截器
 
 // 响应拦截器
