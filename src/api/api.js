@@ -12,3 +12,5 @@ export const getKEData = (params) => post(`${baseUrl}/keywordExtract`, params)
 export const getSAData = (params) => post(`${baseUrl}/semanticSimilarity`, params)
 // 词云数据
 export const getWCData = (params) => post(`${baseUrl}/wordCloud`, params)
+// 自动摘要数据
+export const getAbstractData = (params) => post(`${baseUrl}/wordCloud`, params)

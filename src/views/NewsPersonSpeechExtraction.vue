@@ -126,6 +126,17 @@
               <word-cloud :data="wcData" v-else> </word-cloud>
             </div>
           </div>
+          <div class="resultContent ab">
+            <div class="title">自动摘要</div>
+            <div class="resContent"
+              v-loading="wcLoading" element-loading-spinner="el-icon-loading" element-loading-text='Wait a moment...'
+            >
+              <div class="noData abNodata" v-if="abstractData.length === 0">{{wcNoDataText}}</div>
+              <div class="abstract">
+                <span v-for="(item,index) in abstractData" :key="index"> {{item}} </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -150,20 +161,19 @@
 </template>
 
 <script>
-import { getNPSEData, getKEData, getSAData, getWCData } from '@/api/api.js'
+import { getNPSEData, getKEData, getSAData, getWCData, getAbstractData } from '@/api/api.js'
 export default {
   name: 'npse',
   data () {
     return {
-      placeholder: `    台湾工业总会是岛内最具影响力的工商团体之一，2008年以来，该团体连续12年发表对台当局政策的建言白皮书，集中反映岛内产业界的呼声。
-    台湾工业总会指出，2015年的白皮书就特别提到台湾面临“五缺”（缺水、缺电、缺工、缺地、缺人才）困境，使台湾整体投资环境走向崩坏。然而四年过去，“五缺”未见改善，反而劳动法规日益僵化、两岸关系陷入紧张、对外关系更加孤立。该团体质疑，台当局面对每年的建言，“到底听进去多少，又真正改善了几多”？
-    围绕当局两岸政策，工总认为，由数据来看，当前大陆不仅是台湾第一大出口市场，亦是第一大进口来源及首位对外投资地，建议台湾当局摒弃两岸对抗思维，在“求同存异”的现实基础上，以“合作”取代“对立”，为台湾多数民众谋福创利。`,
+      placeholder: `    中国车市自2011年开始告别一路狂飙，进入平稳增长阶段。今年一季度，国内车市表现疲软，出现多年未见的同比环比双下降。但步入稳步增长阶段的中国车市凭借巨大商机和未来前景依然吸引了众多跨国汽车公司和国内汽车企业踊跃参展。`,
       textarea: '',
       resultType: {
         news_person_speech_extraction: '新闻言论提取',
         keywords_extraction: '关键词提取',
         semantic_association: '语义联想',
-        word_cloud: '词云'
+        word_cloud: '词云',
+        abstract: '自动摘要'
       },
       checked: 'news_person_speech_extraction',
       npseData: [],
@@ -171,14 +181,17 @@ export default {
       saData: [
       ],
       wcData: [],
+      abstractData: ['中国', '车市', '进入', '平稳', '增长', '阶段'],
       npseNoDataText: '暂无数据',
       keNoDataText: '暂无数据',
       saNoDataText: '暂无数据',
       wcNoDataText: '暂无数据',
+      abstractNoDataText: '暂无数据',
       npseLoading: false,
       keLoading: false,
       saLoading: false,
       wcLoading: false,
+      abLoading: false,
       dialogVisible: false
     }
   },
@@ -189,16 +202,19 @@ export default {
         this.getKEData(this.placeholder)
         this.getSAData(this.placeholder)
         this.getWCData(this.placeholder)
+        this.getAbstractData(this.placeholder)
       } else {
         this.getNPSEData(this.textarea)
         this.getKEData(this.textarea)
         this.getSAData(this.textarea)
         this.getWCData(this.textarea)
+        this.getAbstractData(this.textarea)
       }
       this.npseLoading = true
       this.saLoading = true
       this.keLoading = true
       this.wcLoading = true
+      this.abLoading = true
     },
     async getNPSEData (prefix) {
       let res = await getNPSEData({ prefix: prefix })
@@ -229,6 +245,11 @@ export default {
       })
       this.wcLoading = false
       this.wcNoDataText = this.wcData.length === 0 ? '暂无词云生成结果' : this.wcNoDataText
+    },
+    async getAbstractData (prefix) {
+      let res = await getAbstractData({ prefix: prefix })
+      // 接口暂未定义
+      console.log(res)
     },
     catalogClass (value) {
       if (this.checked === value) {
@@ -264,7 +285,8 @@ export default {
         'news_person_speech_extraction': 0,
         'keywords_extraction': heightArr[0],
         'semantic_association': heightArr[1],
-        'word_cloud': heightArr[2]
+        'word_cloud': heightArr[2],
+        'abstract': heightArr[3]
       }
       if (position) {
         divRight.scrollTop = positionMap[position]
@@ -275,9 +297,11 @@ export default {
         } else if (divRight.scrollTop < heightArr[1] - 100) {
           this.checked = 'keywords_extraction'
         } else if (divRight.scrollTop < heightArr[2] - 100) {
-          divRight.scrollHeight - divRight.scrollTop === 500 ? this.checked = 'word_cloud' : this.checked = 'semantic_association'
+          this.checked = 'semantic_association'
+        } else if (divRight.scrollTop < heightArr[3] - 100) {
+          divRight.scrollHeight - divRight.scrollTop === 500 ? this.checked = 'abstract' : this.checked = 'word_cloud'
         } else {
-          this.checked = 'word_cloud'
+          this.checked = 'abstract'
         }
       }
     },
